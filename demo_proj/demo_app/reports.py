@@ -10,6 +10,25 @@ from slick_reporting.views import ReportView, Chart
 from .forms import TotalSalesFilterForm
 from .models import SalesTransaction, Product
 
+class TotalProductSalesByCountry2(ReportView):
+    report_title = _("Product Sales by Country 2")
+
+    report_model = SalesTransaction
+    date_field = "date"
+    group_by = "client__country"  # notice the double underscore
+    columns = [
+        "client__country",
+        ComputationField.create(Sum, "value", name="sum__value", verbose_name="Total Value sold by country $"),
+    ]
+
+    chart_settings = [
+        Chart(
+            "Total sold by country 2 $",
+            Chart.PIE,  # A Pie Chart
+            data_source=["sum__value"],
+            title_source=["client__country"],
+        ),
+    ]
 
 class ProductSales(ReportView):
     report_title = _("Product Sales")

@@ -3,6 +3,7 @@ from django.urls import path
 from . import reports
 
 TUTORIAL = [
+    ("total-product-sales-by-country2", reports.TotalProductSalesByCountry2),
     ("product-sales", reports.ProductSales),
     ("total-product-sales", reports.TotalProductSales),
     ("total-product-sales-by-country", reports.TotalProductSalesByCountry),
